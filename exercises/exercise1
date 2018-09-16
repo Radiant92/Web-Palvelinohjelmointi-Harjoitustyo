@@ -1,0 +1,246 @@
+[13] pry(main)> b = Brewery.create name: 'BrewDog', year: 2007
+   (0.1ms)  begin transaction
+  Brewery Create (0.8ms)  INSERT INTO "breweries" ("name", "year", "created_at", "updated_at") VALUES(?, ?, ?, ?)  [["name", "BrewDog"], ["year", 2007], ["created_at", "2018-09-16 09:43:44.752617"], ["updated_at", "2018-09-16 09:43:44.752617"]]
+   (11.9ms)  commit transaction
+=> #<Brewery:0x00007f852c4806d0
+ id: 5,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Sun, 16 Sep 2018 09:43:44 UTC +00:00,
+ updated_at: Sun, 16 Sep 2018 09:43:44 UTC +00:00>
+[14] pry(main)> b.
+Display all 418 possibilities? (y or n)
+[14] pry(main)> b.n
+b.name
+b.name=
+b.name?
+b.name_before_last_save
+b.name_before_type_cast
+b.name_came_from_user?
+b.name_change
+b.name_change_to_be_saved
+b.name_changed?
+b.name_in_database
+b.name_previous_change
+b.name_previously_changed?
+b.name_was
+b.name_will_change!
+b.nested_attributes_options
+b.nested_attributes_options?
+b.new_record?
+b.nil?
+b.no_touching?
+[14] pry(main)> b.n
+NoMethodError: undefined method `n' for #<Brewery:0x00007f852c4806d0>
+from /home/local/strohm/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activemodel-5.2.1/lib/active_model/attribute_methods.rb:430:in `method_missing'
+[15] pry(main)> b.be
+b.becomes
+b.becomes!
+b.beer_ids
+b.beer_ids=
+b.beers
+b.beers=
+b.before_add_for_beers
+b.before_add_for_beers=
+b.before_add_for_beers?
+b.before_committed!
+[15] pry(main)> b.beers.
+Display all 10390 possibilities? (y or n)
+[15] pry(main)> b.beers.a
+Display all 750 possibilities? (y or n)
+[15] pry(main)> b.beers.ad
+Display all 132 possibilities? (y or n)
+b.beers.adapter
+b.beers.adapter=
+b.beers.adapter_instance_options
+b.beers.adapter_method
+b.beers.adapter_name
+b.beers.adapter_options
+b.beers.adapter_select_options
+b.beers.add
+b.beers.add!
+b.beers.add?
+[15] pry(main)> b.beers.add name: 'Punk IPA', style: 'IPA'
+  Beer Load (0.2ms)  SELECT  "beers".* FROM "beers" WHERE "beers"."brewery_id" = ? LIMIT ?  [["brewery_id", 5], ["LIMIT", 11]]
+NoMethodError: undefined method `add' for #<ActiveRecord::Associations::CollectionProxy []>
+from /home/local/strohm/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/relation/delegation.rb:95:in `method_missing'
+[16] pry(main)> c = Beer.create name: 'Punk IPA' ,style: 'IPA'
+   (0.2ms)  begin transaction
+   (0.1ms)  rollback transaction
+=> #<Beer:0x00005632356e94a8
+ id: nil,
+ name: "Punk IPA",
+ style: "IPA",
+ brewery_id: nil,
+ created_at: nil,
+ updated_at: nil>
+[17] pry(main)> c.brewery = b
+=> #<Brewery:0x00007f852c4806d0
+ id: 5,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Sun, 16 Sep 2018 09:43:44 UTC +00:00,
+ updated_at: Sun, 16 Sep 2018 09:43:44 UTC +00:00>
+[18] pry(main)> b.save
+   (0.2ms)  begin transaction
+   (0.1ms)  commit transaction
+=> true
+[19] pry(main)> c.save
+   (0.1ms)  begin transaction
+  Beer Create (0.3ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Punk IPA"], ["style", "IPA"], ["brewery_id", 5], ["created_at", "2018-09-16 09:49:24.358467"], ["updated_at", "2018-09-16 09:49:24.358467"]]
+   (12.3ms)  commit transaction
+=> true
+[20] pry(main)> c.be
+c.becomes
+c.becomes!
+c.before_add_for_ratings
+c.before_add_for_ratings=
+c.before_add_for_ratings?
+c.before_committed!
+c.before_remove_for_ratings
+c.before_remove_for_ratings=
+c.before_remove_for_ratings?
+c.belongs_to_counter_cache_after_update
+[20] pry(main)> c.beers.count
+NoMethodError: undefined method `beers' for #<Beer:0x00005632356e94a8>
+from /home/local/strohm/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activemodel-5.2.1/lib/active_model/attribute_methods.rb:430:in `method_missing'
+[21] pry(main)> b.beer.count
+NoMethodError: undefined method `beer' for #<Brewery:0x00007f852c4806d0>
+Did you mean?  beers
+from /home/local/strohm/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activemodel-5.2.1/lib/active_model/attribute_methods.rb:430:in `method_missing'
+[22] pry(main)> b.beers.count
+   (0.2ms)  SELECT COUNT(*) FROM "beers" WHERE "beers"."brewery_id" = ?  [["brewery_id", 5]]
+=> 1
+[23] pry(main)> c = Be
+Beer       Benchmark
+[23] pry(main)> c = Beer.create name: 'Nanny State' , style: 'lowalcohol'
+   (0.2ms)  begin transaction
+   (0.1ms)  rollback transaction
+=> #<Beer:0x00005632355fe7c8
+ id: nil,
+ name: "Nanny State",
+ style: "lowalcohol",
+ brewery_id: nil,
+ created_at: nil,
+ updated_at: nil>
+[24] pry(main)> c.brewery = b=> #<Brewery:0x00007f852c4806d0
+ id: 5,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Sun, 16 Sep 2018 09:43:44 UTC +00:00,
+ updated_at: Sun, 16 Sep 2018 09:43:44 UTC +00:00>
+[25] pry(main)> c.save
+   (0.1ms)  begin transaction
+  Beer Create (0.3ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Nanny State"],["style", "lowalcohol"], ["brewery_id", 5], ["created_at", "2018-09-16 09:51:50.447622"], ["updated_at", "2018-09-16 09:51:50.447622"]]
+   (15.1ms)  commit transaction
+=> true
+[26] pry(main)> b.beers.count
+   (0.2ms)  SELECT COUNT(*) FROM "beers" WHERE "beers"."brewery_id" = ?  [["brewery_id", 5]]
+=> 2
+[27] pry(main)> c.save
+   (0.3ms)  begin transaction
+   (0.3ms)  commit transaction
+=> true
+[28] pry(main)> b
+=> #<Brewery:0x00007f852c4806d0
+ id: 5,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Sun, 16 Sep 2018 09:43:44 UTC +00:00,
+ updated_at: Sun, 16 Sep 2018 09:43:44 UTC +00:00>
+[29] pry(main)> c
+=> #<Beer:0x00005632355fe7c8
+ id: 16,
+ name: "Nanny State",
+ style: "lowalcohol",
+ brewery_id: 5,
+ created_at: Sun, 16 Sep 2018 09:51:50 UTC +00:00,
+ updated_at: Sun, 16 Sep 2018 09:51:50 UTC +00:00>
+[30] pry(main)> c.ratings.create score: 99
+   (0.1ms)  begin transaction
+  Rating Create (0.3ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 99], ["beer_id", 16], ["created_at", "2018-09-16 09:54:32.160046"], ["updated_at", "2018-09-16 09:54:32.160046"]]
+   (12.0ms)  commit transaction
+=> #<Rating:0x000056323558d4d8
+ id: 4,
+ score: 99,
+ beer_id: 16,
+ created_at: Sun, 16 Sep 2018 09:54:32 UTC +00:00,
+ updated_at: Sun, 16 Sep 2018 09:54:32 UTC +00:00>
+[31] pry(main)> c.ratings
+  Rating Load (0.2ms)  SELECT "ratings".* FROM "ratings" WHERE "ratings"."beer_id" = ?  [["beer_id", 16]]
+=> [#<Rating:0x000056323558d4d8
+  id: 4,
+  score: 99,
+  beer_id: 16,
+  created_at:
+   Sun, 16 Sep 2018 09:54:32 UTC +00:00,
+  updated_at:
+   Sun, 16 Sep 2018 09:54:32 UTC +00:00>]
+[32] pry(main)> c
+=> #<Beer:0x00005632355fe7c8
+ id: 16,
+ name: "Nanny State",
+ style: "lowalcohol",
+ brewery_id: 5,
+ created_at: Sun, 16 Sep 2018 09:51:50 UTC +00:00,
+ updated_at: Sun, 16 Sep 2018 09:51:50 UTC +00:00>
+[33] pry(main)> c.ratings.create score: 23
+   (0.1ms)  begin transaction
+  Rating Create (1.2ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 23], ["beer_id", 16], ["created_at", "2018-09-16 09:55:46.381631"], ["updated_at", "2018-09-16 09:55:46.381631"]]
+   (12.1ms)  commit transaction
+=> #<Rating:0x00005632354bcec8
+ id: 5,
+ score: 23,
+ beer_id: 16,
+ created_at: Sun, 16 Sep 2018 09:55:46 UTC +00:00,
+ updated_at: Sun, 16 Sep 2018 09:55:46 UTC +00:00>
+[34] pry(main)> c.rating
+NoMethodError: undefined method `rating' for #<Beer:0x00005632355fe7c8>
+Did you mean?  ratings
+               ratings=
+from /home/local/strohm/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activemodel-5.2.1/lib/active_model/attribute_methods.rb:430:in `method_missing'
+[35] pry(main)> c.ratings
+=> [#<Rating:0x000056323558d4d8
+  id: 4,
+  score: 99,
+  beer_id: 16,
+  created_at:
+   Sun, 16 Sep 2018 09:54:32 UTC +00:00,
+  updated_at:
+   Sun, 16 Sep 2018 09:54:32 UTC +00:00>,
+ #<Rating:0x00005632354bcec8
+  id: 5,
+  score: 23,
+  beer_id: 16,
+  created_at:
+   Sun, 16 Sep 2018 09:55:46 UTC +00:00,
+[36] pry(main)> c = Be
+Beer       Benchmark
+[36] pry(main)> c = Beer.find_by(name: 'Punk IPA')
+  Beer Load (0.2ms)  SELECT  "beers".* FROM "beers" WHERE "beers"."name" = ? LIMIT ?  [["name", "PunkIPA"], ["LIMIT", 1]]
+=> #<Beer:0x0000563235402de8
+ id: 15,
+ name: "Punk IPA",
+ style: "IPA",
+ brewery_id: 5,
+ created_at: Sun, 16 Sep 2018 09:49:24 UTC +00:00,
+ updated_at: Sun, 16 Sep 2018 09:49:24 UTC +00:00>
+[37] pry(main)> c
+=> #<Beer:0x0000563235402de8
+ id: 15,
+ name: "Punk IPA",
+ style: "IPA",
+ brewery_id: 5,
+ created_at: Sun, 16 Sep 2018 09:49:24 UTC +00:00,
+ updated_at: Sun, 16 Sep 2018 09:49:24 UTC +00:00>
+[38] pry(main)> c.ratings.create score: 20
+   (0.1ms)  begin transaction
+  Rating Create (1.3ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 20], ["beer_id", 15], ["created_at", "2018-09-16 09:58:36.364752"], ["updated_at", "2018-09-16 09:58:36.364752"]]
+   (12.0ms)  commit transaction
+=> #<Rating:0x0000563231e1eda8
+ id: 6,
+ score: 20,
+ beer_id: 15,
+ created_at: Sun, 16 Sep 2018 09:58:36 UTC +00:00,
+ updated_at: Sun, 16 Sep 2018 09:58:36 UTC +00:00>
+[39] pry(main)>
