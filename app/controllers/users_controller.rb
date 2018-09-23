@@ -49,6 +49,8 @@ class UsersController < ApplicationController
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
+    else
+      redirect_to @user
     end
   end
 
@@ -62,6 +64,8 @@ class UsersController < ApplicationController
         format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
         format.json { head :no_content }
       end
+    else
+      redirect_to @user
     end
   end
 
