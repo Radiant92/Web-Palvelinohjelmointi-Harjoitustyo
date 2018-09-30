@@ -7,9 +7,41 @@ class User < ApplicationRecord
   has_many :beers, through: :ratings
   validates :username, uniqueness: true, length: { minimum: 3, maximum: 30 }
   validates :password, format: { with: /\A(?=.*[A-Z])(?=.*[0-9]).{3,}\z/ }
-  def average
-    return 0 if ratings.empty?
+  def favorite_beer
+    return nil if ratings.empty?
 
-    "%.4g" % (ratings.map(&:score).sum / ratings.count.to_f)
+    ratings.order(score: :desc).limit(1).first.beer
+  end
+
+  def favorite_style
+    return nil if ratings.empty?
+
+    biggest = -1
+    winner = nil
+    lista = ratings.group_by { |rating| rating.beer.style }
+    lista.each do |key, ratings|
+      value = (ratings.sum(&:score) / ratings.count)
+      if biggest < value
+        biggest = value
+        winner = key
+      end
+    end
+    winner
+  end
+
+  def favorite_brewery
+    return nil if ratings.empty?
+
+    biggest = -1
+    winner = nil
+    lista = ratings.group_by { |rating| rating.beer.brewery }
+    lista.each do |key, ratings|
+      value = (ratings.sum(&:score) / ratings.count)
+      if biggest < value
+        biggest = value
+        winner = key
+      end
+    end
+    winner.name
   end
 end

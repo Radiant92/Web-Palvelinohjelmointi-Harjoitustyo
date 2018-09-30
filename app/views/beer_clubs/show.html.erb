@@ -2,7 +2,7 @@
 
 <p>
  <font size="6"> <strong>
-  <%= @beer_club.name %> <%= @beer_club.city %></strong></font>
+  <%= @beer_club.name %>, <%= @beer_club.city %></strong></font>
 </p>
 
 <p>
@@ -22,6 +22,7 @@
     <li><%= link_to user.username, user %></li>
   <% end %>
 </ul>
-
-<%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
+<% if current_user %>
+  <%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
+<% end %>
 <%= link_to 'Back', beer_clubs_path %>

@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+- 2.5.1
+script:
+- bundle exec rails db:migrate
+- bundle exec rspec -fd spec
+deploy:
+  provider: heroku
+  api_key:
+    secure: D06pPhoHmEovufHwmUZ643y8B62nnk+quMWEEw0/aVrq2gbaTT9A4UwF4yN39VGvTFzxo3wyDvq0Nfa7FN2K1Wzyz64gd73WOQvADQrdiP8OxwCTSFn/0IDheQLQGnwte2DA5/mOvUAYlaeGkCn3XTy0ATjAHsozM30lfVDrjKY2ZRCj0oGKJYJdRGI+da8uOkyqM8eGtUNSnYPhjvDUqo3oSNgHUIJi94FhgPWyOoXzZKzIdVQXNjeWpKDaStM2elH8rYr9q67AoFQrE9SHqnWTRT23KvDvFysbtNY70ZzSfJZkHT5O77oZgf8qLgKQvBJTq05BdsXPuVPwv4tNCtFIw1OIIr8839/jKrGJYk1scBmyt0kvFMxF/pK9uNuJNMcq7z0xkkYav4ic//2sLQGidzZCwwZrlU/Rl4SLeMOGbIV3q/egdILpyJspz0KhO6S+dzXexD9cTHtnMxVZYLY7G3LEZArBEFMFVV9s4eOe4al+lzQm86uckiYFz9OjOLLfhZTykoADuoQveFMBGGDmTopSWbHfnQ/F10808Ezh4SIq6q4z2kR4G0KSrry+XWsyNLt+WECBDUy5PbMtFKAYwFN2AO3c/PlHGSN5YloUOqnGfxWABUx4/SpUXVlkQhmDh/e0x/5RQr50dr4xvEs615tqiu5BrPbgTgZ8U1k=
+  app: serene-garden-91202
+  on:
+    repo: Radiant92/Web-Palvelinohjelmointi-Harjoitustyo
+  run: "rails db:migrate"
