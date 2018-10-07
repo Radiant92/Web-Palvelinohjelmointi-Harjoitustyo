@@ -26,7 +26,7 @@ class User < ApplicationRecord
         winner = key
       end
     end
-    winner
+    winner.name
   end
 
   def favorite_brewery

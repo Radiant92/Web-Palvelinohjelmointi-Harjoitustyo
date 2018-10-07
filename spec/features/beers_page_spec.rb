@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe "Beers page" do
     let!(:brewery){ FactoryBot.create(:brewery) }
+    let!(:style){ FactoryBot.create(:style) }
     let!(:user){ FactoryBot.create(:user) }
     before :each do
         visit signin_path
@@ -13,7 +14,7 @@ describe "Beers page" do
     it "new beer has a valid (not empty) name" do
         visit new_beer_path
         fill_in('Name', with:'Beer')
-        select('Lager', from:'beer[style]')
+        select('Lager', from:'beer[style_id]')
         select('anonymous', from:'beer[brewery_id]')
 
         expect{
@@ -25,7 +26,7 @@ describe "Beers page" do
     it "invalid beers wont be saved, but will prompt an error message" do
         visit new_beer_path
         fill_in('Name', with:'')
-        select('Lager', from:'beer[style]')
+        select('Lager', from:'beer[style_id]')
         select('anonymous', from:'beer[brewery_id]')
         click_button "Create Beer"
         expect(Beer.count).to eq(0)

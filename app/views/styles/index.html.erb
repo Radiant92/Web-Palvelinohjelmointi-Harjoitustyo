@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Styles</h1>
+
+ <% @styles.each do |style| %>
+    <li><%= link_to style.name, style %></li>
+    <% end %>
