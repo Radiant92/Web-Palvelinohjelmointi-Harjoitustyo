@@ -1,17 +1,30 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
-  <font size="6"><strong><%= @user.username %></strong></font>
+  <h3><strong><%= @user.username %></strong><h3>
+
+<% if @user.locked %>
+<h3><span class="badge badge-warning">Account closed</span></h3>
+<br/>
+<% if current_user && current_user.admin %>
+<%= link_to "open account", toggle_activity_user_path(@user.id), method: :post, class: "btn btn-danger" %>
+<% end %>
+
+<% else %>
+<% if current_user && current_user.admin %>
+<%= link_to "close account", toggle_activity_user_path(@user.id), method: :post, class: "btn btn-danger" %>
+<% end %>
+<% end %>
 </p>
 <p>
 <% if @user.ratings.empty? %>
 User has not made any ratings
 <% else %>
-User has made <%=pluralize( @user.ratings.count, "rating") %>, average rating <%= @user.average_rating %>
+User has made <%=pluralize( @user.ratings.count, "rating") %>, average rating <%= round(@user.average_rating) %>
 <br/>
-Favorite style of beer: <%= @user.favorite_style%>
+Favorite style of beer: <%= @user.favorite_style.name%>
 <br/>
-Favorite brewery: <%= @user.favorite_brewery%>
+Favorite brewery: <%= @user.favorite_brewery.name%>
 <% end %>
 </p>
 <p>
@@ -43,8 +56,7 @@ Memberships
     </li>
   <% end %>
 </ul>
-<% if @user == current_user %>
-  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <%= link_to 'Edit', edit_user_path(@user) %>
+<% if @user == current_user or (current_user && current_user.admin) %>
+  <%= edit_and_destroy_buttons(@user) %>
 <% end %> 
 <%= link_to 'Back', users_path %>

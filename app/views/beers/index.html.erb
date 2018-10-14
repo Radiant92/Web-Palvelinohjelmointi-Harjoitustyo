@@ -1,8 +1,7 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Beers</h1>
 
-<table>
+<table tableclass="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -15,13 +14,10 @@
   <tbody>
     <% @beers.each do |beer| %>
       <tr>
-        <td><%= link_to beer.name, beer %></td>
-        <td><%= beer.style.name %></td>
-        <td><%= link_to beer.brewery.name, beer.brewery %></td>
-        <% if current_user%>
-          <td><%= link_to 'Edit', edit_beer_path(beer) %></td>
-          <td><%= link_to 'Destroy', beer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
+        <td><button type="button" class="btn btn-light"><%= link_to beer.name, beer %></button></td>
+        <td><button type="button" class="btn btn-light"><%= link_to beer.style.name, beer.style %></button></td>
+        <td><button type="button" class="btn btn-light"><%= link_to beer.brewery.name, beer.brewery %></button></td>
+       
       </tr>
     <% end %>
   </tbody>
@@ -29,6 +25,4 @@
 
 <br>
 
-<%= link_to('New Beer', new_beer_path) if current_user %>
-<br/>
-<%=link_to 'list of breweries', breweries_path %>
+<%= link_to('New Beer', new_beer_path, class:"btn btn-primary") if current_user %> <%=link_to 'list of breweries', breweries_path, class:"btn btn-primary" %>

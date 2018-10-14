@@ -10,18 +10,21 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+<form>
+  <div class="form-group row">
     <%= form.label :beer_club_id %>
+    <div class="col-auto">
     <%= form.number_field :beer_club_id %>
   </div>
 
-  <div class="field">
+  <div class="form-group row">
     <%= form.label :user_id %>
+    <div class="col-auto">
     <%= form.number_field :user_id %>
   </div>
+  
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+ <br/>
+   <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 <% end %>

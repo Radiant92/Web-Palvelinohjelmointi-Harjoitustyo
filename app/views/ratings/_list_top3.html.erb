@@ -1,0 +1,17 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Score</th>
+    <th>Name</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+  
+  <% r.each do |object| %>
+  <tr>
+    <td> <%= round(object.average_rating) %></td>
+    <td> <button type="button" class="btn btn-light"><%= link_to object.name, object %></button></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>

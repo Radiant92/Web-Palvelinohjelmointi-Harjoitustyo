@@ -4,8 +4,6 @@ rvm:
 script:
 - bundle exec rails db:migrate
 - bundle exec rspec -fd spec
-env:
-- BEERMAPPING_APIKEY=119f26c44f896eaf4eef20c562ee9a84
 deploy:
   provider: heroku
   api_key:
@@ -13,4 +11,7 @@ deploy:
   app: serene-garden-91202
   on:
     repo: Radiant92/Web-Palvelinohjelmointi-Harjoitustyo
-  run: "rails db:migrate"
+  run: rails db:migrate
+env:
+  global:
+    secure: WuCVygaQBSlJPhFYZDs6tO67eN0pqW40qKszajFhnY5j5QQeNZPr9nh/845bX6cKXSViGHxRwsxpSD/s8eMujS0H9FrYl2NAdnA4xdUYKGBjObfjHejGiBdnMeOfVaCJXzWVtgxHpBL3mfboEJgruERug13Slm1Q+oGFXpdMfkN81PSl4p8EtQ4RujV9DMPVUGYqxZMtU2NflCnpvphRDTdvMXTyu6eyCRJocBcUzv7oGBVJPmLUkdRJQny7cWpib1SPewzJeOz6Y/MYbSldFa1vi8FbLK7IAfDWW6e9FD175iU/+7E8P29OJ+eLRd7XqEHEDJ/AzXhkNi69IcBc0YvpfYn2GLjN8Ozuy9i17yWkX7cRmwEYFXittQ3h5RuGOiYz5BRN/NAZge8vkphFAvWhMbcFLmaLoTgPtyMP8AlmROrmWav+SMv3WDI7awnq/H488tGLS4aFCkFS23sfzQtATMQxBSbHfxorY07Yn4abBId1FERYlLiVMOM7tIE1+ju7uKeN20mE0Lw66YmpHDOkspRpJWU6+2fcBi51hD71RiPsjBvwmoiRdxgr3ZxHHkuYV9mf6PPww5nB+wxuzNIGCecvBVLH3Az8ZQZPiP7rTYxNJVi0OHvscdV81rZB8/nWdIW5em7hOJBYbh0Af8+vUz6jMbtpsHevPpuCYos=

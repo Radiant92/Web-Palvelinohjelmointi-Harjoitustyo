@@ -13,35 +13,30 @@ class User < ApplicationRecord
     ratings.order(score: :desc).limit(1).first.beer
   end
 
-  def favorite_style
-    return nil if ratings.empty?
+  def self.top(amount)
+    User.all.sort_by{ |b| -(b.ratings.count || 0) }.first(amount)
+  end
 
-    biggest = -1
-    winner = nil
-    lista = ratings.group_by { |rating| rating.beer.style }
-    lista.each do |key, ratings|
-      value = (ratings.sum(&:score) / ratings.count)
-      if biggest < value
-        biggest = value
-        winner = key
-      end
-    end
-    winner.name
+  def favorite_style
+    favorite(:style)
   end
 
   def favorite_brewery
+    favorite(:brewery)
+  end
+
+  def favorite(groupped_by)
     return nil if ratings.empty?
 
-    biggest = -1
-    winner = nil
-    lista = ratings.group_by { |rating| rating.beer.brewery }
-    lista.each do |key, ratings|
-      value = (ratings.sum(&:score) / ratings.count)
-      if biggest < value
-        biggest = value
-        winner = key
-      end
+    grouped_ratings = ratings.group_by{ |r| r.beer.send(groupped_by) }
+    averages = grouped_ratings.map do |group, ratings|
+      { group: group, score: average_of(ratings) }
     end
-    winner.name
+
+    averages.max_by{ |r| r[:score] }[:group]
+  end
+
+  def average_of(ratings)
+    ratings.sum(&:score).to_f / ratings.count
   end
 end

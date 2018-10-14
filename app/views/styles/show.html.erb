@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
   <font size="6"><strong> <%= @style.name %></strong></font>
@@ -8,5 +8,9 @@
 <br/>
 <font size ="3"><p>beers</p></font>
   <% @style.beers.each do |beer| %>
-   <li><%= link_to beer.name, beer %> by <%= link_to beer.brewery.name, brewery_path%></li>
+   <td><button type="button" class="btn btn-light"><%= link_to beer.name, beer %> by <%= link_to beer.brewery.name, brewery_path%></button></td>
+   <br/>
  <% end %>
+ <br/>
+ <%= edit_and_destroy_buttons(@style) %>
+ 

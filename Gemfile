@@ -18,6 +18,9 @@ group :production do
    gem 'pg'
    gem 'rails_12factor'
 end
+
+gem 'bootstrap', '~> 4.1.3'
+gem 'jquery-rails'
 # password
 gem 'bcrypt', '~> 3.1.7'
 # Use Puma as the app server

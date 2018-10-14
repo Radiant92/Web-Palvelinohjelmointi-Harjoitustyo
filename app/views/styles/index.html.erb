@@ -1,7 +1,8 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Styles</h1>
 
  <% @styles.each do |style| %>
-    <li><%= link_to style.name, style %></li>
+    <td><button type="button" class="btn btn-light"><%= link_to style.name, style %></button></td>
+    <br/>
     <% end %>

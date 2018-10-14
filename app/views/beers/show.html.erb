@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
   <strong>Name:</strong>
@@ -7,7 +7,7 @@
 
 <p>
   <strong>Style:</strong>
-  <%= @beer.style %>
+  <%= @beer.style.name %>
 </p>
 
 <p>
@@ -19,7 +19,7 @@
 <% if @beer.ratings.empty? %>
 beer has not been rated!
 <% else %>
-beer has <%=pluralize( @beer.ratings.count, "rating") %>, average <%= @beer.average_rating %>
+beer has <%=pluralize( @beer.ratings.count, "rating") %>, average <%= round(@beer.average_rating) %>
 <% end %>
 </p>
 <% if current_user %>
@@ -30,6 +30,6 @@ beer has <%=pluralize( @beer.ratings.count, "rating") %>, average <%= @beer.aver
     score: <%= f.number_field :score %>
     <%= f.submit %>
   <% end %>
-  <%= link_to 'Edit', edit_beer_path(@beer) %> |
 <% end %>
+ <%= edit_and_destroy_buttons(@beer) %>
 <%= link_to 'Back', beers_path %>
