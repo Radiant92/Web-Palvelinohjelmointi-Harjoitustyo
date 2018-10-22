@@ -1,12 +1,16 @@
 class RatingsController < ApplicationController
   def index
-    @ratings = Rating.all
-    @beers = Beer.all
+    @ratings = Rating.includes(:beer, :user).all
+    @beers = Beer.includes(:brewery, :style).all
     @recent = Rating.recent
-    @top_breweries = Brewery.top 3
-    @top_beers = Beer.top 3
-    @top_styles = Style.top 3
-    @top_users = User.top 3
+
+    @top_breweries = Rails.cache.fetch("brewery top 3") { Brewery.top(3) }
+
+    @top_beers = Rails.cache.fetch("beer top 3") { Beer.top(3) }
+
+    @top_styles = Rails.cache.fetch("style top 3") { Style.top(3) }
+
+    @top_users = Rails.cache.fetch("user top 3") { User.top(3) }
   end
 
   def new

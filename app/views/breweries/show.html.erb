@@ -1,4 +1,5 @@
 
+<% cache @brewery do %> 
 <p> Number of beers: <%= @brewery.beers.count %> </p>
 <p>
   <h2><%= @brewery.name %>
@@ -26,5 +27,6 @@ This brewery has not received any ratings!
 Brewery has <%=pluralize( @brewery.ratings.count, "rating")%>, average <%= round(@brewery.average_rating) %>
 <% end %>
 </p>
+<% end %>
 <%= edit_and_destroy_buttons(@brewery) %>
 <%= link_to 'Back', breweries_path, class:"btn btn-light" %>

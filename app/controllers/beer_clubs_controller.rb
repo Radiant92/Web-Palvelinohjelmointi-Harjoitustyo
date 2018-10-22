@@ -6,12 +6,20 @@ class BeerClubsController < ApplicationController
   # GET /beer_clubs.json
   def index
     @beer_clubs = BeerClub.all
+
+    order = params[:order] || 'name'
+
+    @beer_clubs = case order
+                  when 'name' then @beer_clubs.sort_by{ |b| b.name.downcase }
+                  when 'founded' then @beer_clubs.sort_by(&:founded)
+                  when 'city' then @beer_clubs.sort_by{ |b| b.city.downcase }
+                  end
   end
 
   # GET /beer_clubs/1
   # GET /beer_clubs/1.json
   def show
-    @membership = if @beer_club.members.include? current_user
+    @membership = if @beer_club.users.include?(current_user)
                     @beer_club.memberships.where(user: current_user).first
                   else
                     Membership.new beer_club: @beer_club

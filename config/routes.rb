@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   get 'clubs', to: 'beer_clubs#index'
   post 'places', to:'places#search'
   get 'styles', to:'styles#index'
+  get 'beerlist', to:'beers#list'
+  get 'brewerylist', to:'breweries#list'
+  get 'auth/:provider/callback', to: 'sessions#create_oauth'
   resources :ratings, only: [:index, :new, :create, :destroy]
   resource :session, only: [:new, :create, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

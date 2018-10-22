@@ -6,6 +6,7 @@ ruby '2.5.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
 # Use sqlite3 as the database for Active Record (i changed this week1)
+gem 'omniauth-github'
 group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -13,12 +14,12 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.8'
 end
-
+gem 'sucker_punch', '~> 2.0'
 group :production do
    gem 'pg'
    gem 'rails_12factor'
 end
-
+gem 'rack-mini-profiler'
 gem 'bootstrap', '~> 4.1.3'
 gem 'jquery-rails'
 # password
